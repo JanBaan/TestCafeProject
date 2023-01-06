@@ -24,7 +24,6 @@ class HomeObject
     async AssertHomeURL()
     {
         const getLocation = ClientFunction(() => document.location.href);
-        
         await t.expect(getLocation()).contains('allaboutcats.com');
     }
 

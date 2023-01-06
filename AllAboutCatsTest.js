@@ -7,13 +7,20 @@ fixture`HomePageTest`
         await HomeObject.CheckBrowser();
     });
 
-// test('visiting home page', async t => {
-//     await HomeObject.AssertHomeURL();
-//     await HomeObject.AssertHomeTabs();
-// });
+test('visiting home page', async t => {
+    await HomeObject.AssertHomeURL();
+    await HomeObject.AssertHomeTabs();
+});
 
 test('search first article from list', async t => {
-    //await SearchObject.CheckIfSearchBarExist();
+    await SearchObject.CheckIfSearchBarExist();
     await SearchObject.SearchByQuery('funny');
     await SearchObject.SelectFirstSearchItemInList();
+});
+
+test('search all articles', async t => {
+    await SearchObject.CheckIfSearchBarExist();
+    await SearchObject.SearchByQuery('cheese');
+    await SearchObject.SelectEnterInSearchBar();
+    await SearchObject.SelectEnterInSearchBar('cheese')
 });
