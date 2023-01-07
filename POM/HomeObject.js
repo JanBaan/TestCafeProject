@@ -40,6 +40,19 @@ class HomeObject
                 .eql(this.tabNameArray[i]);
         }
     }
+
+    async OpenPage(tab, dropdownItem)
+    {
+        if(dropdownItem != null)
+        {
+            var selectedTab = await Selector('#menu-primary-navigation').child().cont;
+        }
+        else
+        {
+            await t.expect(tab.visible).eql(true);
+            await t.click(tab);
+        }
+    }
 }
 
 export default new HomeObject();
