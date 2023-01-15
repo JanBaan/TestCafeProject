@@ -8,33 +8,35 @@ fixture`Going to home page`
         await HomeObject.CheckBrowser();
     });
 
-// test('visiting home page', async t => {
-//     await HomeObject.AssertHomeURL();
-//     await HomeObject.AssertHomeTabs();
-// });
+test('visiting home page', async t => {
+    await HomeObject.AssertURL('allaboutcats.com');
+    await HomeObject.AssertHomeTabs();
+});
 
-// test('search first article from list', async t => {
-//     await SearchObject.CheckIfSearchBarExist();
-//     await SearchObject.SearchByQuery('funny');
-//     await SearchObject.SelectFirstSearchItemInList();
-// });
+test('search first article from list', async t => {
+    await SearchObject.CheckIfSearchBarExist();
+    await SearchObject.SearchByQuery('funny');
+    await SearchObject.SelectFirstSearchItemInList();
+});
 
-// test('search all articles', async t => {
-//     await SearchObject.CheckIfSearchBarExist();
-//     await SearchObject.SearchByQuery('cheese');
-//     await SearchObject.SelectEnterInSearchBar();
-//     await SearchObject.SelectEnterInSearchBar('cheese')
-// });
+test('search all articles', async t => {
+    await SearchObject.CheckIfSearchBarExist();
+    await SearchObject.SearchByQuery('cheese');
+    await SearchObject.SelectEnterInSearchBar();
+    await SearchObject.SelectEnterInSearchBar('cheese')
+});
 
-// test('calculate cat\'s age', async t => {
-//     await HomeObject.OpenPage('Resources', 'Cat Age Calculator');
-//     await CatAgeCalculatorObject.SelectCatAgeOption('1 year');
-//     await CatAgeCalculatorObject.SelectNextButton();
-//     await CatAgeCalculatorObject.SelectCatWhereOption('Indoor-Only');
-//     await CatAgeCalculatorObject.SelectSubmitButton();
-//     await CatAgeCalculatorObject.CheckAgeResult('15 human years');
-// });
+test('calculate cat\'s age', async t => {
+    await HomeObject.OpenPage('Resources', 'Cat Age Calculator');
+    await HomeObject.AssertURL('cat-age-calculator');
+    await CatAgeCalculatorObject.SelectCatAgeOption('1 year');
+    await CatAgeCalculatorObject.SelectNextButton();
+    await CatAgeCalculatorObject.SelectCatWhereOption('Indoor-Only');
+    await CatAgeCalculatorObject.SelectSubmitButton();
+    await CatAgeCalculatorObject.CheckAgeResult('15 human years');
+});
 
 test('visit CatBehavior page', async t => {
-
+    await HomeObject.OpenPage('Cat Behavior', null);
+    await HomeObject.AssertURL('cat-behavior');
 });

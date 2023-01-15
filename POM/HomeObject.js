@@ -21,10 +21,10 @@ class HomeObject
     }
 
     //asserts the URL from the homepage
-    async AssertHomeURL()
+    async AssertURL(expectedURL)
     {
         const getLocation = ClientFunction(() => document.location.href);
-        await t.expect(getLocation()).contains('allaboutcats.com');
+        await t.expect(getLocation()).contains(expectedURL);
     }
 
     //asserts the tabs on the homepage
@@ -41,6 +41,7 @@ class HomeObject
         }
     }
 
+    //opens a page depending if it needs to open a tab or hover over one to select a page in a dropdown
     async OpenPage(tab, dropdownItem)
     {
         var selectedTab = null;

@@ -34,7 +34,6 @@ class CatAgeCalculationObject
             .expect(catPlaceOptions.visible).eql(true)
             .click(catPlaceOptions.withText(location));
     }
-
     
     //selects the `Next` button in the Cat Age Calculator page
     async SelectNextButton()
