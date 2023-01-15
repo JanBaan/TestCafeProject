@@ -32,7 +32,7 @@ class HomeObject
     {
         await t.expect(Selector('#menu-primary-navigation').visible).eql(true);
         
-        for(let i = 0; i < this.tabNameArray.length; i++)
+        for(let i = 0; i < await Selector('#menu-primary-navigation').child().count; i++)
         {
             await t
                 .expect(Selector('#menu-primary-navigation')
@@ -43,14 +43,38 @@ class HomeObject
 
     async OpenPage(tab, dropdownItem)
     {
+        var selectedTab = null;
+        
+        for(let i = 0; i < await Selector('#menu-primary-navigation').child().count; i++)
+        {
+            if(await Selector('#menu-primary-navigation').child(i).child(0).textContent == tab)
+            {
+                selectedTab = Selector('#menu-primary-navigation').child(i).child(0);
+
+                await t.expect(selectedTab.visible).eql(true);
+
+                break;
+            }
+        }
+
         if(dropdownItem != null)
         {
-            var selectedTab = await Selector('#menu-primary-navigation').child().cont;
+            await t.hover(selectedTab);
+            
+            for(let i = 0; i < await selectedTab.sibling().child().count; i++)
+            {
+                if(await selectedTab.sibling().child(i).textContent == dropdownItem)
+                {
+                    await t.expect(await selectedTab.sibling().child(i).visible).eql(true);
+                    await t.click(selectedTab.sibling().child(i));
+
+                    break;
+                }
+            }
         }
         else
         {
-            await t.expect(tab.visible).eql(true);
-            await t.click(tab);
+            await t.click(selectedTab);
         }
     }
 }
