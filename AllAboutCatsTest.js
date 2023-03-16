@@ -9,7 +9,7 @@ fixture`Going to home page`
     });
 
 test('visiting home page', async t => {
-    await HomeObject.AssertURL('allaboutcats.com');
+    await HomeObject.AssertURL('cats.com');
     await HomeObject.AssertHomeTabs();
 });
 

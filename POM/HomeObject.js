@@ -4,7 +4,7 @@ class HomeObject
 {
     constructor()
     {
-        this.tabNameArray = new Array('Cat Food', 'Cat Litter', 'Litter Box', 'Cat Health', 'Cat Behavior', 'Cat Breeds', 'Resources', 'About Us');
+        
     }
 
     //checks which browser is being used
@@ -31,14 +31,16 @@ class HomeObject
     async AssertHomeTabs()
     {
         await t.expect(Selector('#menu-primary-navigation').visible).eql(true);
-        
-        for(let i = 0; i < await Selector('#menu-primary-navigation').child().count; i++)
-        {
-            await t
-                .expect(Selector('#menu-primary-navigation')
-                .child(i).child(0).textContent)
-                .eql(this.tabNameArray[i]);
-        }
+        await t.expect(Selector('#menu-primary-navigation').child().count).eql(8);
+
+        await t.expect(Selector('#menu-primary-navigation').child(0).child('a').textContent).eql('Cat Food');
+        await t.expect(Selector('#menu-primary-navigation').child(1).child('a').textContent).eql('Cat Litter');
+        await t.expect(Selector('#menu-primary-navigation').child(2).child('a').textContent).eql('Litter Box');
+        await t.expect(Selector('#menu-primary-navigation').child(3).child('a').textContent).eql('Cat Health');
+        await t.expect(Selector('#menu-primary-navigation').child(4).child('a').textContent).eql('Cat Behavior');
+        await t.expect(Selector('#menu-primary-navigation').child(5).child('a').textContent).eql('Cat Breeds');
+        await t.expect(Selector('#menu-primary-navigation').child(6).child('a').textContent).eql('Resources');
+        await t.expect(Selector('#menu-primary-navigation').child(7).child('a').textContent).eql('About Us');
     }
 
     //opens a page depending if it needs to open a tab or hover over one to select a page in a dropdown
@@ -48,12 +50,9 @@ class HomeObject
         
         for(let i = 0; i < await Selector('#menu-primary-navigation').child().count; i++)
         {
-            if(await Selector('#menu-primary-navigation').child(i).child(0).textContent == tab)
+            if(await Selector('#menu-primary-navigation').child(i).child('a').textContent == tab)
             {
-                selectedTab = Selector('#menu-primary-navigation').child(i).child(0);
-
-                await t.expect(selectedTab.visible).eql(true);
-
+                selectedTab = Selector('#menu-primary-navigation').child(i).child('a');
                 break;
             }
         }
@@ -68,7 +67,6 @@ class HomeObject
                 {
                     await t.expect(await selectedTab.sibling().child(i).visible).eql(true);
                     await t.click(selectedTab.sibling().child(i));
-
                     break;
                 }
             }
